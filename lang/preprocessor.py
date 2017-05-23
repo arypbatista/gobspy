@@ -1,10 +1,12 @@
+from .exceptions import StaticException
+
 import re
 
 IMPORTS = [
     'from lang.builtins import *'
 ]
 
-class PreprocessorException(Exception):
+class PreprocessorException(StaticException):
     pass
 
 class Preprocessor:

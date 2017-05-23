@@ -2,14 +2,7 @@ import sys
 from ..i18n import translate as t
 from .types import *
 from ..state import state as global_state
-
-class DynamicException(Exception):
-    """Base exception for Gobstones runtime errors."""
-
-    def error_type(self):
-        "Description of the exception type."
-        return t('Dynamic exception')
-
+from ..exceptions import DynamicException
 
 # Board Procedures
 

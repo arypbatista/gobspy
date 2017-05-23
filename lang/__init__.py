@@ -9,4 +9,4 @@ def run(text, filepath=None):
     try:
         exec(code, builtins, builtins)
     except Exception as e:
-        print(format_exc(e).replace('<string>', filepath))
+        print(format_exc().replace('<string>', filepath))
