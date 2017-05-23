@@ -1,0 +1,31 @@
+proc PonerN(cantidad, color):
+    for i in range(cantidad):
+        Poner(color)
+
+proc DibujarLinea(lado, color, d):
+    for i in range(lado - 1):
+        Poner(color)
+        Mover(d)
+    Poner(color)
+
+proc Cuadrado(lado, color):
+    direc = minDir()
+    for i in range(4):
+        DibujarLinea(lado, color, direc)
+        direc = siguiente(direc)
+
+func hayBolitasAl(color, d):
+    Mover(d)
+    
+    return hayBolitas(color)
+
+Imprimir(True)
+Imprimir('Goaooasmqormero')
+
+proc Main():
+    Imprimir(True)
+    VaciarTablero()
+    PonerN(200, Rojo)
+    Cuadrado(4, Verde)
+    Mover(Oeste)
+    Imprimir(hayBolitasAl(Verde, Este))

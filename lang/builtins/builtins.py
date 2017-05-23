@@ -178,6 +178,17 @@ def typeof(value):
     else:
         return value.enum_type()
 
+
+def define_function(_def):
+
+    def function(*args, **kwargs):
+        global_state.push()
+        result = _def(*args, **kwargs)
+        global_state.pop()
+        return result
+
+    return function
+
 # Saving locals
 # This line must be the last line on this file.
 builtins = locals()
