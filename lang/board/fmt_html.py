@@ -18,9 +18,9 @@
 from ..utils import *
 from ..i18n import translate as t
 from ..builtins.types.color import NUM_COLORS, COLORS_BY_NAME, COLORS, COLOR_NAMES, Color
-import basic
+from .basic import BoardFormatException, BoardFormat
 
-class HtmlBoardFormat(basic.BoardFormat):
+class HtmlBoardFormat(BoardFormat):
   # size can be:
   #   - the string 'relative'
   #   - an integer (side of a cell in pixels)
@@ -175,4 +175,4 @@ table.gbs_board {
     f.write(self.render(board))
 
   def load(self, board, f):
-    raise basic.BoardFormatException(t('Loading of html boards not supported'))
+    raise BoardFormatException(t('Loading of html boards not supported'))

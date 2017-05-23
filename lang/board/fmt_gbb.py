@@ -20,12 +20,12 @@ import re
 from ..utils import *
 from ..i18n import translate as t
 from ..builtins.types.color import NUM_COLORS, COLORS_BY_NAME, Color
-import basic
+from .basic import BoardFormatException, BoardFormat
 
 def is_numeric(x):
   return re.match('^[0-9]+$', x)
 
-class GbbBoardFormat(basic.BoardFormat):
+class GbbBoardFormat(BoardFormat):
   "Simple human-friendly board format."
 
   def dump(self, board, f, style='verbose', **kwargs):
@@ -81,7 +81,7 @@ class GbbBoardFormat(basic.BoardFormat):
         return orig[0].split(' ')
 
     def fail(msg):
-      raise basic.BoardFormatException(t('Malformed gbb board') + '\n' +
+      raise BoardFormatException(t('Malformed gbb board') + '\n' +
                                  '  ' + t('Near line:') + ' "' + orig[0].strip('\r\n') + '"\n' +
                                  '  ' + msg)
 

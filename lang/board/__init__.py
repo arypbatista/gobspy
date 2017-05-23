@@ -21,8 +21,8 @@ import random
 
 from ..utils import seq_reversed
 from ..i18n import translate as t
-import formats
-import basic
+from .formats import *
+from .basic import BoardFormatException
 from ..builtins.types.color import NUM_COLORS, COLORS_BY_NAME
 
 class SelfDestructionException(Exception):
@@ -323,20 +323,20 @@ class Board(object):
         self.randomize_full()
         return self
 
-    def dump(self, f, fmt=formats.DefaultFormat, **kwargs):
+    def dump(self, f, fmt=DefaultFormat, **kwargs):
         "Dump the board to the file handle `f` in the given format."
-        if fmt in formats.AvailableFormats:
-            formats.AvailableFormats[fmt]().dump(self, f, **kwargs)
+        if fmt in AvailableFormats:
+            AvailableFormats[fmt]().dump(self, f, **kwargs)
         else:
-            raise basic.BoardFormatException(
+            raise BoardFormatException(
                 'Board file format unrecognized: %s' % (fmt,))
 
-    def load(self, f, fmt=formats.DefaultFormat):
+    def load(self, f, fmt=DefaultFormat):
         "Load the board from the file handle `f` in the given format."
-        if fmt in formats.AvailableFormats:
-            formats.AvailableFormats[fmt]().load(self, f)
+        if fmt in AvailableFormats:
+            AvailableFormats[fmt]().load(self, f)
         else:
-            raise basic.BoardFormatException(
+            raise BoardFormatException(
                 'Board file format unrecognized: %s' % (fmt,))
 
     def clone(self):
@@ -364,7 +364,7 @@ class Board(object):
                 self.cells[y][x] = other.cells[y][x].clone()
 
     def __repr__(self):
-        gbt_format = formats.AvailableFormats['gbt']()
+        gbt_format = AvailableFormats['gbt']()
         out = gbt_format.numbered_contents(self)
         return '\n'.join(out)
 
@@ -436,7 +436,7 @@ class Board(object):
 def load_board_from(filename):
     """Load the board from the given filename, attempting to
     recognize the format by the file extension."""
-    fmt = formats.format_for(filename)
+    fmt = format_for(filename)
     board = Board((1, 1))
     f = open(filename, 'r')
     board.load(f, fmt)
@@ -446,7 +446,7 @@ def load_board_from(filename):
 def dump_board_to(board, filename, style='verbose'):
     """Dump the board into the given filename, attempting to
     recognize the format by the file extension."""
-    fmt = formats.format_for(filename)
+    fmt = format_for(filename)
     f = open(filename, 'w')
     board.dump(f, fmt, style=style)
     f.close()

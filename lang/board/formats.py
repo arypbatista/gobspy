@@ -16,14 +16,14 @@
 #
 
 
-import fmt_gbt
-import fmt_gbb
-import fmt_html
+from .fmt_gbt import GbtBoardFormat
+from .fmt_gbb import GbbBoardFormat
+from .fmt_html import HtmlBoardFormat
 
 AvailableFormats = {
-  'gbt': fmt_gbt.GbtBoardFormat,
-  'gbb': fmt_gbb.GbbBoardFormat,
-  'html': fmt_html.HtmlBoardFormat,
+  'gbt': GbtBoardFormat,
+  'gbb': GbbBoardFormat,
+  'html': HtmlBoardFormat,
 }
 
 DefaultFormat = 'gbb'

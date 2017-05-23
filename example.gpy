@@ -24,5 +24,3 @@ proc Main():
     #Cuadrado(4, Verde)
     #Mover(Oeste)
     Imprimir(nroBolitas(Rojo))
-
-Imprimir("Hola")
