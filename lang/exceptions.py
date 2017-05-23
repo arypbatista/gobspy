@@ -1,5 +1,8 @@
 from .utils import indent
 
+class BoardFormatException(Exception):
+    pass
+
 class SourceException(Exception):
 
     def __init__(self, message, area=None):

@@ -19,7 +19,7 @@ import re
 
 from ..utils import *
 from ..i18n import translate as t
-from ..builtins.types.color import NUM_COLORS, COLORS_BY_NAME, COLORS, COLOR_NAMES, Color
+from ..builtins.types.color import NUM_COLORS, I18N_COLORS_BY_NAME, COLORS, I18N_COLOR_NAMES, Color
 from .basic import BoardFormatException, BoardFormat
 from math import log10, pow
 
@@ -152,7 +152,7 @@ class GbtBoardFormat(BoardFormat):
         x = self.Cell_w - 2
       else:
         x = self.Max_num_len
-      out[y][x] = Color(col).name()[0]
+      out[y][x] = Color(col).i18n_name()[0]
       scount = str(count)
       if len(scount) > self.Max_num_len:
         scount = prefix_notation(count)
@@ -236,7 +236,7 @@ class GbtBoardFormat(BoardFormat):
 
   def _put_from_description(self, cell, description):
     coli = 0
-    for cn in COLOR_NAMES:
+    for cn in I18N_COLOR_NAMES:
       if description[-1].lower() == cn[0].lower():
         count = description[:-1]
         for l in count:

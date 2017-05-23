@@ -25,6 +25,9 @@ class Color(Enum):
         "Return the name of this color."
         return COLOR_NAMES[self.ord()]
 
+    def i18n_name(self):
+        return t(self.name())
+
     def __repr__(self):
         return self.name()
 
@@ -32,5 +35,8 @@ class Color(Enum):
 COLORS = [Color(i) for i in range(len(COLOR_NAMES))]
 
 COLORS_BY_NAME = dict([(c.name(), c) for c in COLORS])
+
+I18N_COLOR_NAMES = [c.i18n_name() for c in COLORS]
+I18N_COLORS_BY_NAME = dict([(c.i18n_name(), c) for c in COLORS])
 
 NUM_COLORS = len(COLORS)

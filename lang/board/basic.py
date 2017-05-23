@@ -15,9 +15,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 from ..utils import *
-
-class BoardFormatException(Exception):
-    pass
+from ..exceptions import BoardFormatException
 
 class BoardFormat(object):
     def to_string(self, board, **kwargs):

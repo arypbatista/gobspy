@@ -19,7 +19,7 @@ import re
 
 from ..utils import *
 from ..i18n import translate as t
-from ..builtins.types.color import NUM_COLORS, COLORS_BY_NAME, Color
+from ..builtins.types.color import NUM_COLORS, I18N_COLORS_BY_NAME, Color
 from .basic import BoardFormatException, BoardFormat
 
 def is_numeric(x):
@@ -60,7 +60,7 @@ class GbbBoardFormat(BoardFormat):
         for coli in range(4):
           cant = board.cells[y][x].num_stones(coli)
           if cant == 0: continue
-          col = Color(coli).name()
+          col = Color(coli).i18n_name()
           cell.append('%s %i' % (translate(col), cant))
         if cell == []: continue
         f.write('%s %i %i %s\r\n' % (translate('cell'), x, y, ' '.join(cell)))
@@ -99,7 +99,7 @@ class GbbBoardFormat(BoardFormat):
     board.randomize_header()
     board._clear_board()
 
-    color_to_index = COLORS_BY_NAME
+    color_to_index = I18N_COLORS_BY_NAME
 
     visited_cells = {}
 
@@ -123,8 +123,10 @@ class GbbBoardFormat(BoardFormat):
           count_col = {}
           rest = l[3:]
           while rest != []:
-            if len(rest) >= 2 and rest[0] in color_to_index and is_numeric(rest[1]):
-              coli = color_to_index[rest.pop(0)]
+            color_name = rest[0].capitalize()
+            if len(rest) >= 2 and color_name in color_to_index and is_numeric(rest[1]):
+              rest.pop(0)
+              coli = color_to_index[color_name]
               count_col[coli] = count_col.get(coli, 0) + int(rest.pop(0))
             else:
               fail(t('Expected cell line "cell <x> <y> [<color> <num>]*"'))
