@@ -4,14 +4,23 @@ IMPORTS = [
     'from lang.builtins import *'
 ]
 
+class PreprocessorException(Exception):
+    pass
+
 class Preprocessor:
 
     def process(self, text):
         res = text
+        self.check_root_commands(text)
         res = self.process_procedures(res)
         res = self.process_functions(res)
         res = self.process_main(res)
         return res
+
+    def check_root_commands(self, text):
+        root_commands = list(re.finditer(r'^[^\#dfp\s][^eur\s][^fno\s]', text, re.MULTILINE))
+        if len(root_commands) > 0:
+            raise PreprocessorException('You cannot call commands outside a procedure or a function definition')
 
     def process_procedures(self, text):
         return text.replace('proc ', 'def ')

@@ -16,16 +16,13 @@ proc Cuadrado(lado, color):
 
 func hayBolitasAl(color, d):
     Mover(d)
-    
     return hayBolitas(color)
 
-Imprimir(True)
-Imprimir('Goaooasmqormero')
-
 proc Main():
-    Imprimir(True)
     VaciarTablero()
     PonerN(200, Rojo)
-    Cuadrado(4, Verde)
-    Mover(Oeste)
-    Imprimir(hayBolitasAl(Verde, Este))
+    #Cuadrado(4, Verde)
+    #Mover(Oeste)
+    Imprimir(nroBolitas(Rojo))
+
+Imprimir("Hola")

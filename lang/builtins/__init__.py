@@ -1,12 +1,14 @@
-from .builtins import builtins
+from .builtins import builtins as original_builtins
 from ..i18n import translate as t
 
-for k in builtins.keys():
+for k in original_builtins.keys():
     if k[0] != '_':
         try:
-            value = builtins[k]
+            value = original_builtins[k]
             code = '%s = value' % k
             code = '%s = value' % t(k)
             exec(code)
         except e:
             pass
+
+builtins = locals()
