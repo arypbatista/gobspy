@@ -19,11 +19,13 @@
 from .fmt_gbt import GbtBoardFormat
 from .fmt_gbb import GbbBoardFormat
 from .fmt_html import HtmlBoardFormat
+from .fmt_json import JsonBoardFormat
 
 AvailableFormats = {
   'gbt': GbtBoardFormat,
   'gbb': GbbBoardFormat,
   'html': HtmlBoardFormat,
+  'json': JsonBoardFormat
 }
 
 DefaultFormat = 'gbb'
