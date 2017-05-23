@@ -36,6 +36,6 @@ class Enum(object):
         return self._ord
 
     def __eq__(self, other):
-        return isinstance(other, GbsEnum) and \
+        return isinstance(other, Enum) and \
                self.enum_type() == other.enum_type() and \
                self._ord == other.ord()

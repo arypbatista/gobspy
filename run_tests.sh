@@ -1,1 +1,1 @@
-python -m unittest discover -s ./test -p test_*.py
+python3 -m unittest discover -p test_*.py -t ./ -s ./
