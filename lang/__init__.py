@@ -1,5 +1,8 @@
 import sys
-from cStringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 from .builtins import builtins
 from .state import state
 from .preprocessor import preprocess
@@ -8,11 +11,15 @@ from traceback import format_exc
 
 class GobspyResult:
 
-    def __init__(self, pycode, out, final_board):
+    def __init__(self, pycode, out, final_board, error=''):
         self.final_board = final_board
         self.out = out
         self.result = []
         self.pycode = pycode
+        self.error = error
+
+    def failed(self):
+        return self.final_board is None
 
 class Gobspy:
 
@@ -23,12 +30,17 @@ class Gobspy:
         code = preprocess(text)
         old_output = sys.stdout
         redirected_output = sys.stdout = StringIO()
+
+        final_board = None
+        error_message = ''
         try:
             exec(code, builtins, builtins)
+            final_board = state.board
         except Exception as e:
-            print(format_exc().replace('<string>', filepath))
+            error_message = format_exc(e).replace('<string>', filepath)
         sys.stdout = old_output
-        return GobspyResult(code, redirected_output.getvalue(), state.board)
+        result = GobspyResult(code, redirected_output.getvalue(), final_board, error_message)
+        return result
 
 Gobstones = Gobspy
 

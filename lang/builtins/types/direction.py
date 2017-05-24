@@ -1,4 +1,4 @@
-from .enum import Enum
+from .enum import NamedEnum
 from ...i18n import translate as t
 
 #### Directions
@@ -20,7 +20,7 @@ DIRECTION_DELTA = {
 }
 
 
-class Direction(Enum):
+class Direction(NamedEnum):
     "Represents a Gobstones direction."
 
     def name(self):

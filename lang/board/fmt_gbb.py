@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011, 2012 Pablo Barenbaum <foones@gmail.com>
+# Copyright (C) 2011-2017 Ary Pablo Batista <arypbatista@gmail.com>, Pablo Barenbaum <foones@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -73,6 +73,7 @@ class GbbBoardFormat(BoardFormat):
     orig = ['']
 
     f_lines = read_stripped_lines(f)
+
     def next_line():
       if f_lines == []:
         return False
@@ -124,14 +125,18 @@ class GbbBoardFormat(BoardFormat):
           rest = l[3:]
           while rest != []:
             color_name = rest[0].capitalize()
-            if len(rest) >= 2 and color_name in color_to_index and is_numeric(rest[1]):
+            coli = None
+            for k in color_to_index.keys():
+                if color_name == k or k[0] == color_name[0]:
+                    coli = color_to_index[k]
+
+            if len(rest) >= 2 and not coli is None and is_numeric(rest[1]):
               rest.pop(0)
-              coli = color_to_index[color_name]
               count_col[coli] = count_col.get(coli, 0) + int(rest.pop(0))
             else:
               fail(t('Expected cell line "cell <x> <y> [<color> <num>]*"'))
           for k, v in count_col.items():
-            board.cells[y][x].set_num_stones(k, v)
+            board.set_num_stones(y, x, k, v)
         else:
           fail(t('Expected cell line "cell <x> <y> [<color> <num>]*"'))
       else:

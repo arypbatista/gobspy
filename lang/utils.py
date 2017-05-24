@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011, 2012 Pablo Barenbaum <foones@gmail.com>
+# Copyright (C) 2011-2017 Ary Pablo Batista <arypbatista@gmail.com>, Pablo Barenbaum <foones@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ except ImportError:
 
 #### Various utility functions
 
-VERSION = 0, 9, 9
+VERSION = 0, 1, 0
 
 def version_number():
     return '%s.%s.%s' % VERSION
@@ -380,4 +380,3 @@ getch = _Getch()
 
 def clear():
   os.system('cls' if os.name == 'nt' else 'clear')
-    

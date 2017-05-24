@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011, 2012 Pablo Barenbaum <foones@gmail.com>
+# Copyright (C) 2011-2017 Ary Pablo Batista <arypbatista@gmail.com>, Pablo Barenbaum <foones@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

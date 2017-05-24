@@ -25,6 +25,7 @@ class Preprocessor:
             raise PreprocessorException('You cannot call commands outside a procedure or a function definition')
 
     def process_procedures(self, text):
+        text = text.replace(r"procedure\s+([a-zA-Z]+)", 'proc')
         return text.replace('proc ', 'def ')
 
     def process_main(self, text):
@@ -36,6 +37,7 @@ class Preprocessor:
 
     def process_functions(self, text):
         res = text + '\n\n# Define functions'
+        res = res.replace(r"function\s+([a-zA-Z]+)", 'func')
         for match in re.finditer(r"func\s+([a-zA-Z]+)", text):
             name = match.group(1)
             res += '\n%s = define_function(%s)' % (name, name)

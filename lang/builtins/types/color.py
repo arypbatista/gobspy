@@ -1,4 +1,4 @@
-from .enum import Enum
+from .enum import NamedEnum
 from ...i18n import translate as t
 
 #### Colors
@@ -10,7 +10,7 @@ COLOR_NAMES = [
     'Color3',
 ]
 
-class Color(Enum):
+class Color(NamedEnum):
     "Represents a Gobstones color."
 
     def enum_type(self):
@@ -24,9 +24,6 @@ class Color(Enum):
     def name(self):
         "Return the name of this color."
         return COLOR_NAMES[self.ord()]
-
-    def i18n_name(self):
-        return t(self.name())
 
     def __repr__(self):
         return self.name()

@@ -1,3 +1,5 @@
+from ...i18n import translate as t
+
 class Enum(object):
     """Represents an enumerated type."""
 
@@ -39,3 +41,18 @@ class Enum(object):
         return isinstance(other, Enum) and \
                self.enum_type() == other.enum_type() and \
                self._ord == other.ord()
+
+
+class NamedEnum(Enum):
+
+    def name(self):
+        pass
+
+    def initial(self):
+        return self.name()[0]
+
+    def i18n_name(self):
+        return t(self.name())
+
+    def i18n_initial(self):
+        return self.i18n_name()[0]

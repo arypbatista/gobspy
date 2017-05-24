@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011, 2012 Pablo Barenbaum <foones@gmail.com>
+# Copyright (C) 2011-2017 Ary Pablo Batista <arypbatista@gmail.com>, Pablo Barenbaum <foones@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@ class BoardFormat(object):
         out.close()
         return res
     def from_string(self, s, board=None):
-        import lang.gbs_board
+        from . import Board
         if board is None:
-            board = lang.gbs_board.Board()
+            board = Board()
         f = StringIO(s)
         self.load(board, f)
         f.close()

@@ -570,7 +570,7 @@ Otros usos:
   'Stop': 'Parar',
   'Execution interrupted by the user': 'La ejecución del programa fue interrumpida por el usuario.\nEs posible que el programa se haya colgado debido a un while que no termina.',
 
-  'Gobstones version': 'PyGobstones versión',
+  'Gobstones version': 'Gobspy versión',
 
 # Board viewer
   'Initial board': 'Tablero inicial',
@@ -629,7 +629,7 @@ Otros usos:
   'Checking fingerprints': 'Comparando los resultados',
 
 # Version
-  'I18N_gbs_version(%s)': 'PyGobstones versión %s\nIntroducción a la programación\nTPI, UNQ, 2011-2012\n',
+  'I18N_gbs_version(%s)': 'Gobspy versión %s\nIntroducción a la programación\nUniversidad Nacional de Quilmes, 2011-2017\n',
 }
 
 # English
@@ -670,7 +670,7 @@ Other usages:
   'Color3': 'Violet',
 
 # Version
-  'I18N_gbs_version(%s)': 'PyGobstones version %s\n',
+  'I18N_gbs_version(%s)': 'Gobspy version %s\n',
 
 }
 
