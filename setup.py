@@ -1,5 +1,6 @@
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
+from gobspy.lang.utils import version_number
 # To use a consistent encoding
 from codecs import open
 from os import path
@@ -7,16 +8,30 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, 'README'), encoding='utf-8') as f:
     long_description = f.read()
 
+VERSION = version_number()
+ENVIRONMENT = 'prod'
+PACKAGE_NAME = 'gobspy'
+
+def get_name():
+    if ENVIRONMENT in ['prod']:
+        return PACKAGE_NAME
+    else:
+        return "%s-%s" % (PACKAGE_NAME, ENVIRONMENT)
+
+gobspy_packages = find_packages(exclude=['contrib', 'docs', 'tests'])
+
+print('Gobspy packages', gobspy_packages)
+
 setup(
-    name='gobspy',
+    name=get_name(),
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1.0',
+    version=VERSION,
 
     description='Gobstones for Python',
     long_description=long_description,
@@ -61,7 +76,7 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    packages=gobspy_packages,
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -78,7 +93,7 @@ setup(
     # for example:
     # $ pip install -e .[dev,test]
     extras_require={
-        #'dev': ['check-manifest'],
+        'dev': ['check-manifest'],
         'test': ['coverage'],
     },
 
@@ -86,7 +101,7 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     package_data={
-        'sample': ['package_data.dat'],
+    #    'sample': ['package_data.dat'],
     },
 
     # Although 'package_data' is the preferred approach, in some case you may
@@ -100,7 +115,9 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'gobspy=gobspy:main',
+            '%s=gobspy:main' % get_name(),
+    	    '%s%s=gobspy:main' % (get_name(), VERSION[:1]),
+    	    '%s%s=gobspy:main' % (get_name(), VERSION[:3]),
         ],
     },
 )
