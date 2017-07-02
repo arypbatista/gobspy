@@ -23,6 +23,11 @@ import tempfile
 import atexit
 import shutil
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 def python_major_version():
     return sys.version_info[0]
 

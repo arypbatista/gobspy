@@ -21,8 +21,8 @@ def main():
     i18n.set_language(args.locale)
     result = lang.run(read_file(args.file), args.file)
 
-    if result.error is None:
-        print(lang.state.board)
+    if not result.failed():
+        print(result.final_board)
     else:
         print(result.error)
     if args.print_compiled:

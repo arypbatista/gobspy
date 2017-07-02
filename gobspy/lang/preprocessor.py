@@ -6,7 +6,7 @@ IMPORTS = [
     'from lang.builtins import *'
 ]
 
-colon_keyword = re.compile('(if|else|def|while)')
+colon_keyword = re.compile('(if|else|def|while)\s+')
 
 class PreprocessorException(StaticException):
     pass
