@@ -1,0 +1,5 @@
+procedure Main()
+{
+  VaciarTablero()
+  Poner(Verde); Poner(Rojo)
+}

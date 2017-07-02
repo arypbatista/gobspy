@@ -11,7 +11,7 @@ from traceback import format_exc
 
 class GobspyResult:
 
-    def __init__(self, pycode, out, final_board, error=''):
+    def __init__(self, pycode, out, final_board, error=None):
         self.final_board = final_board
         self.out = out
         self.result = []
