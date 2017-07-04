@@ -1,6 +1,6 @@
-import lang
-from lang.utils import read_file
-import lang.i18n as i18n
+from . import lang
+from .lang.utils import read_file
+from .lang import i18n
 import argparse
 
 def parse_args():
