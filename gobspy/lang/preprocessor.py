@@ -21,8 +21,23 @@ class Preprocessor:
         res = self.process_main(res)
         res = self.process_command_separator(res)
         res = self.remove_brackets(res)
+        res = self.process_comments(res)
         res = self.fix_colons(res)
         return res
+
+    def process_comments(self, text):
+        replacements = {
+            '//' : '#',
+            '--' : '#',
+            '/*' : '"""',
+            '*/' : '"""',
+            '{-' : '"""',
+            '-}' : '"""',
+        }
+        out = text
+        for k in replacements.keys():
+            out = text.replace(k, replacements[k])
+        return out
 
     def fix_colons(self, text):
         out = ''

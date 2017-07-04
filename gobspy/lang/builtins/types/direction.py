@@ -46,4 +46,7 @@ DIRECTIONS = [Direction(i) for i in range(len(DIRECTION_NAMES))]
 
 DIRECTIONS_BY_NAME = dict([(d.name(), d) for d in DIRECTIONS])
 
+I18N_DIRECTION_NAMES = [d.i18n_name() for d in DIRECTIONS]
+I18N_DIRECTIONS_BY_NAME = dict([(d.i18n_name(), d) for d in DIRECTIONS])
+
 NUM_DIRECTIONS = len(DIRECTIONS)

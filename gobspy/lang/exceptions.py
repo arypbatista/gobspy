@@ -163,6 +163,9 @@ def interpretation(e):
     return out
 
 def to_message(filepath, e):
+    if filepath is None:
+        filepath = t('main program')
+
     ind = '  '
     out = []
 
