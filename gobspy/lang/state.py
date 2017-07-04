@@ -7,7 +7,10 @@ class State:
         self.init()
 
     def backtrace(self, message=''):
-        return message + '\n' + ''.join(format_list(extract_stack()[:-2]))
+        return message + '\n' + self.area()
+
+    def area(self):
+        return ''.join(format_list(extract_stack()[:-2]))
 
     def push(self):
         self.board.push_state()

@@ -2,5 +2,6 @@ procedure Main()
 {
   VaciarTablero()
   Poner(Verde); Poner(Rojo)
-  Poner(Azul); Poner(Negro);
+  Sacar(Rojo)
+  Sacar(Verde)
 }

@@ -4,7 +4,8 @@ from .builtins import builtins
 from .board import Board
 from .utils import StringIO
 from .state import state
-from traceback import format_exc
+from .i18n import translate as t
+from .exceptions import to_message, GobspyException, PythonException
 
 class GobspyResult:
 
@@ -20,7 +21,7 @@ class GobspyResult:
 
 class GobspyRunner:
 
-    def run(self, code, filepath=None, initial_board=None):
+    def run(self, code, filepath=t('main program'), initial_board=None):
         state.init()
         if initial_board:
             state.board = initial_board
@@ -33,12 +34,17 @@ class GobspyRunner:
         try:
             exec(code, builtins, builtins)
             final_board = state.board
+            sys.stdout = old_output
         except Exception as e:
-            error_message = format_exc(e).replace('<string>', filepath)
-        sys.stdout = old_output
+            sys.stdout = old_output
+            if not isinstance(e, GobspyException):
+                exception = PythonException(e)
+            else:
+                exception = e
+            error_message = to_message(filepath, exception)
 
         return GobspyResult(code, redirected_output.getvalue(), final_board, error_message)
 
 
-def run_program(code, filepath=None, initial_board=None):
+def run_program(code, filepath=t('main program'), initial_board=None):
     return GobspyRunner().run(code, filepath, initial_board)

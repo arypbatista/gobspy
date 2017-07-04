@@ -22,6 +22,7 @@ import webbrowser
 import tempfile
 import atexit
 import shutil
+from .parse import *
 
 try:
     from StringIO import StringIO

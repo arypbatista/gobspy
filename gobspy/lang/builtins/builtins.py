@@ -2,7 +2,7 @@ import sys
 from ..i18n import translate as t
 from .types import *
 from ..state import state as global_state
-from ..exceptions import DynamicException
+from ..exceptions import RuntimeException, BoardMoveException
 
 # Board Procedures
 
@@ -33,9 +33,7 @@ def Move(direction):
     if global_state.board.can_move(direction):
         global_state.board.move(direction)
     else:
-        msg = global_state.backtrace(
-            t('Cannot move to %s') % (direction,))
-        raise RuntimeException(msg)
+        raise BoardMoveException(direction, global_state.area())
 
 def GoToOrigin():
     return global_state.board.go_to_origin()
@@ -142,13 +140,6 @@ def ord(value):
         assert False
 
 # Private
-
-class RuntimeException(DynamicException):
-    """Base exception for Gobstones runtime errors."""
-
-    def error_type(self):
-        "Description of the exception type."
-        return t('Runtime error')
 
 def isinteger(value):
     "Return True iff the given Python value is integral."

@@ -1,0 +1,6 @@
+proc Main():
+  VaciarTablero()
+  Poner(Verde)
+  Poner(Rojo)
+  Sacar(Rojo)
+  Sacar(Verde)

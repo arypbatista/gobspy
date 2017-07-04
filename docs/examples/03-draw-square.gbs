@@ -1,0 +1,19 @@
+procedure DibujarLinea(length, color, dir) {
+  repeat length {
+    Poner(color)
+    Mover(dir)
+  }
+}
+
+procedure DibujarCuadrado(color) {
+  repeatWith d in minDir()..maxDir() {
+    DibujarLinea(3, color, d)
+  }
+}
+
+procedure Main()
+{
+  DibujarCuadrado(Rojo)
+  IrAlOrigen()
+  DibujarCuadrado(Verde)
+}
